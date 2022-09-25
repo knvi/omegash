@@ -7,10 +7,10 @@ use std::{
 
 fn main() {
     println!("Welcome to omegash.");
-    
+
     loop {
         print!("> ");
-        stdout().flush();
+        stdout().flush().unwrap();
         let mut input = String::new();
         stdin().read_line(&mut input).unwrap();
 
