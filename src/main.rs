@@ -6,6 +6,8 @@ use std::{
 };
 
 fn main() {
+    println!("Welcome to omegash.");
+    
     loop {
         print!("> ");
         stdout().flush();
