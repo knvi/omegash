@@ -4,12 +4,14 @@ use std::{
     path::Path,
     process::{Command, Stdio, Child},
 };
+use whoami;
 
 fn main() {
-    println!("Welcome to omegash.");
+    println!("Welcome to omegash.\n");
 
     loop {
-        print!("> ");
+        println!("\u{001b}[32m{}", env::current_dir().unwrap().display());
+        print!("{} > ", whoami::username());
         stdout().flush().unwrap();
         let mut input = String::new();
         stdin().read_line(&mut input).unwrap();
@@ -32,6 +34,7 @@ fn main() {
                     previous_command = None;
                 },
                 "exit" => return,
+                "quit" => return,
                 command => {
                     let stdin = previous_command
                         .map_or(
@@ -62,7 +65,8 @@ fn main() {
                             eprintln!("{}", e);
                         },
                     };
-    
+                    
+                    println!("");
                 }
             }
         }
@@ -71,5 +75,6 @@ fn main() {
             // block until the final command has finished
             final_command.wait().unwrap();
         }
+        println!("");
     }
 }
